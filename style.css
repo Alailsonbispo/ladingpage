@@ -58,12 +58,24 @@ a:hover {
     top: 0;
     z-index: 100;
     border-bottom: 2px solid var(--color-white);
+    transition: all 0.3s ease-in-out; /* Adicionado para a transição do scroll */
+}
+
+/* NOVO: Estilos do Header Dinâmico (ativado pelo JS) */
+.header.scrolled {
+    padding: 10px 50px; /* Reduz o padding vertical */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para "flutuar" */
 }
 
 .header h1 {
     font-family: var(--font-display);
     font-size: 1.8em;
     letter-spacing: 5px;
+    transition: font-size 0.3s ease-in-out; /* Adicionado para a transição do scroll */
+}
+
+.header.scrolled h1 {
+    font-size: 1.5em; /* Reduz o tamanho da fonte do título */
 }
 
 .header nav a {
@@ -92,7 +104,8 @@ a:hover {
 
 /* HERO SECTION - K-DOT BACKGROUND */
 .hero-section {
-    background: url('/imagens/kendrick-lamar-bw.jpg') no-repeat center center/cover; 
+    /* CORREÇÃO APLICADA: Removida a barra inicial para caminho relativo */
+    background: url('imagens/kendrick-lamar-bw.jpg') no-repeat center center/cover; 
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -156,13 +169,13 @@ a:hover {
 .content-section {
     padding: 80px 0;
     border-top: 1px solid var(--color-dark-gray);
-    /* ESTADO INICIAL PARA REVEAL ON SCROLL */
+    /* NOVO: ESTADO INICIAL PARA REVEAL ON SCROLL */
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* ESTADO FINAL PARA REVEAL ON SCROLL (Adicionado via JavaScript) */
+/* NOVO: ESTADO FINAL PARA REVEAL ON SCROLL (Adicionado via JavaScript) */
 .content-section.reveal {
     opacity: 1;
     transform: translateY(0);
@@ -220,7 +233,7 @@ a:hover {
     font-weight: bold;
 }
 
-/* BIOGRAFIA E NOTA MUSICAL (Estilos unificados) */
+/* BIOGRAFIA E NOTA MUSICAL */
 .bio-text, .music-note {
     text-align: center;
     margin: 30px auto; 
@@ -388,18 +401,4 @@ a:hover {
         display: block;
         margin: 10px 0;
     }
-}
-/* HEADER DINÂMICO - ESTILOS APÓS ROLAGEM */
-
-/* Estado reduzido e com sombra (ativado pelo JS) */
-.header.scrolled {
-    padding: 10px 50px; /* Reduz o padding vertical */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra sutil para "flutuar" */
-    transition: all 0.3s ease-in-out; /* Garante uma transição suave */
-}
-
-/* Reduz o título H1 junto com o header */
-.header.scrolled h1 {
-    font-size: 1.5em; /* Reduz o tamanho da fonte do título */
-    transition: font-size 0.3s ease-in-out;
 }
