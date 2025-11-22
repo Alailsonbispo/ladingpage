@@ -105,7 +105,7 @@ a:hover {
 /* HERO SECTION - K-DOT BACKGROUND */
 .hero-section {
     /* CORREÇÃO APLICADA: Removida a barra inicial para caminho relativo */
-    background: url('imagens/kendrick-lamar-bw.jpg') no-repeat center center/cover; 
+    background: url('./imagens/kendrick-lamar-bw.jpg') no-repeat center center/cover; 
     height: 100vh;
     display: flex;
     justify-content: center;
