@@ -1,9 +1,15 @@
+/*
+ * style.css - LÍRIC'S & CODE'S: Dark Street Flow V2.1
+ * Melhorias: Alto Contraste Extremo, Alerta Vermelho, Efeitos JS e Parallax.
+ */
+
 /* GERAL */
 :root {
     --color-black: #000000;
     --color-white: #ffffff;
-    --color-light-gray: #f5f5f5;
-    --color-dark-gray: #333333;
+    --color-light-gray: #f0f0f0; /* Ajustado para um branco mais 'puro' no P&B */
+    --color-dark-gray: #1a1a1a; /* Ajustado para um preto quase absoluto (mais contraste) */
+    --color-highlight: #ff0000; /* NOVO: VERMELHO SANGUE PURO */
     --font-primary: 'Oswald', sans-serif;
     --font-display: 'Permanent Marker', cursive;
 }
@@ -24,21 +30,29 @@ body {
     line-height: 1.6;
     background-color: var(--color-black);
     color: var(--color-light-gray);
+    min-height: 100vh;
 }
 
 a {
-    color: var(--color-white);
+    color: var(--color-light-gray); 
     text-decoration: none;
     transition: color 0.3s;
 }
 
 a:hover {
-    color: var(--color-dark-gray);
+    color: var(--color-highlight); /* UPGRADE: Hover agora é o Alerta Vermelho */
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-primary);
+    text-transform: uppercase;
+    color: var(--color-white);
+    letter-spacing: 1px;
 }
 
 /* GERAL E CONTAINERS */
 .container {
-    width: 80%;
+    width: 85%; /* Levemente mais largo */
     max-width: 1200px;
     margin: 0 auto;
     padding: 60px 0;
@@ -47,9 +61,9 @@ a:hover {
 
 /* HEADER */
 .header {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--color-black); 
     color: var(--color-white);
-    padding: 15px 50px;
+    padding: 15px 5%; /* Ajustado o padding lateral */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,25 +71,25 @@ a:hover {
     width: 100%;
     top: 0;
     z-index: 100;
-    border-bottom: 2px solid var(--color-white);
-    transition: all 0.3s ease-in-out; /* Adicionado para a transição do scroll */
+    border-bottom: 2px solid var(--color-highlight); /* UPGRADE: Borda de Alerta Vermelho */
+    transition: all 0.3s ease-in-out;
 }
 
-/* NOVO: Estilos do Header Dinâmico (ativado pelo JS) */
+/* === ESTILOS PARA O JS: HEADER DINÂMICO === */
 .header.scrolled {
-    padding: 10px 50px; /* Reduz o padding vertical */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para "flutuar" */
+    padding: 10px 5%;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3); /* UPGRADE: Sombra sutil Vermelha */
 }
 
 .header h1 {
     font-family: var(--font-display);
     font-size: 1.8em;
     letter-spacing: 5px;
-    transition: font-size 0.3s ease-in-out; /* Adicionado para a transição do scroll */
+    transition: font-size 0.3s ease-in-out;
 }
 
 .header.scrolled h1 {
-    font-size: 1.5em; /* Reduz o tamanho da fonte do título */
+    font-size: 1.5em;
 }
 
 .header nav a {
@@ -91,7 +105,7 @@ a:hover {
     position: absolute;
     width: 0;
     height: 2px;
-    background: var(--color-white);
+    background: var(--color-highlight); /* UPGRADE: Linha do hover em Vermelho */
     bottom: 0;
     left: 0;
     transition: width 0.3s ease-out;
@@ -104,7 +118,6 @@ a:hover {
 
 /* HERO SECTION - K-DOT BACKGROUND */
 .hero-section {
-    /* CORREÇÃO APLICADA: Removida a barra inicial para caminho relativo */
     background: url('imagens/kendrick-lamar-bw.jpg') no-repeat center center/cover; 
     height: 100vh;
     display: flex;
@@ -112,6 +125,10 @@ a:hover {
     align-items: center;
     text-align: center;
     position: relative;
+    
+    /* === MUDANÇA PARA O PARALLAX SUTIL === */
+    background-attachment: fixed; 
+    /* ==================================== */
 }
 
 .hero-section::before {
@@ -121,7 +138,7 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85); /* Aumenta o overlay para 85% para focar no texto */
     z-index: 1;
 }
 
@@ -132,27 +149,63 @@ a:hover {
 
 .hero-content p {
     font-size: 1.2em;
-    letter-spacing: 3px;
+    letter-spacing: 4px; /* Mais destaque */
     margin-bottom: 10px;
+    color: var(--color-highlight); /* UPGRADE: Tagline em Vermelho Sangue */
 }
 
 .hero-content h2 {
-    font-size: 4em;
+    font-size: 4.5em; /* Aumentado o tamanho para mais impacto */
     text-transform: uppercase;
     margin-bottom: 30px;
-    border: 5px solid var(--color-white);
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+/* === ESTILOS PARA O JS: TYPEWRITER EFFECT === */
+/* Garante que o H2 do Hero section não tenha a borda durante a digitação */
+#hero-title {
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* Restaura o estilo de borda APÓS a digitação do JS (para manter o visual forte) */
+#hero-title:not(:empty) { 
+    border: 5px solid var(--color-highlight); /* UPGRADE: Borda de Alerta Vermelho */
     padding: 10px 20px;
     display: inline-block;
 }
 
+/* CURSOR ANIMADO */
+.cursor {
+    display: inline-block;
+    width: 5px; /* Largura do cursor */
+    height: 1.1em; /* Altura do cursor */
+    margin-left: 5px;
+    background-color: var(--color-white); 
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.cursor.typed-end {
+    background-color: var(--color-highlight); /* Cursor fica vermelho no final */
+}
+/* === FIM ESTILOS TYPEWRITER === */
+
+
+/* BOTÃO CTA (ALERTA VERMELHO) */
 .cta-button {
-    background-color: var(--color-white);
+    background-color: var(--color-highlight); /* UPGRADE: Botão Vermelho Sólido */
     color: var(--color-black);
     padding: 15px 30px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.1em;
-    border: 2px solid var(--color-white);
+    border: 2px solid var(--color-highlight);
     cursor: pointer;
     letter-spacing: 2px;
     transition: all 0.3s;
@@ -161,6 +214,7 @@ a:hover {
 .cta-button:hover {
     background-color: transparent;
     color: var(--color-white);
+    border-color: var(--color-white);
     transform: translateY(-3px);
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); 
 }
@@ -168,21 +222,21 @@ a:hover {
 /* CONTENT SECTIONS */
 .content-section {
     padding: 80px 0;
-    border-top: 1px solid var(--color-dark-gray);
-    /* NOVO: ESTADO INICIAL PARA REVEAL ON SCROLL */
+    border-top: 1px solid var(--color-dark-gray); 
+    
+    /* === ESTILOS PARA O JS: REVEAL ON SCROLL === */
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* NOVO: ESTADO FINAL PARA REVEAL ON SCROLL (Adicionado via JavaScript) */
 .content-section.reveal {
     opacity: 1;
     transform: translateY(0);
 }
 
 .secondary-bg {
-    background-color: var(--color-dark-gray);
+    background-color: var(--color-dark-gray); /* UPGRADE: Fundo de seção de destaque em preto quase absoluto */
 }
 
 /* TÍTULOS DE SEÇÃO (h3) */
@@ -190,8 +244,8 @@ a:hover {
     text-transform: uppercase;
     font-size: 2em;
     margin: 0 auto 40px auto; 
-    color: var(--color-white);
-    border-bottom: 3px solid var(--color-white);
+    color: var(--color-highlight); /* UPGRADE: Títulos de Seção em Alerta Vermelho */
+    border-bottom: 3px solid var(--color-highlight); /* UPGRADE: Linha de destaque em Vermelho */
     display: inline-block;
     padding-bottom: 5px;
     letter-spacing: 2px;
@@ -209,19 +263,19 @@ a:hover {
 .info-card {
     flex: 1;
     padding: 20px;
-    border: 2px solid var(--color-white);
-    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--color-highlight); /* UPGRADE: Borda de registro em Vermelho */
+    background-color: rgba(0, 0, 0, 0.5); /* UPGRADE: Fundo transparente escuro */
     text-align: left;
     transition: all 0.3s;
 }
 
 .info-card:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: var(--color-dark-gray); /* UPGRADE: Fundo sólido escuro no hover */
     transform: translateY(-5px);
 }
 
 .info-card h4 {
-    color: var(--color-white);
+    color: var(--color-light-gray);
     text-transform: uppercase;
     margin-bottom: 10px;
     font-size: 1.1em;
@@ -230,7 +284,7 @@ a:hover {
 
 .info-card p {
     font-size: 1.2em;
-    font-weight: bold;
+    font-weight: 700; 
 }
 
 /* BIOGRAFIA E NOTA MUSICAL */
@@ -238,14 +292,14 @@ a:hover {
     text-align: center;
     margin: 30px auto; 
     width: 80%;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--color-white);
 }
 
 .bio-text {
     font-style: italic;
     font-size: 1.1em;
-    border-left: 5px solid var(--color-white);
+    border-left: 5px solid var(--color-highlight); /* UPGRADE: Borda de citação em Vermelho */
     padding-left: 20px;
     margin-top: 30px;
     text-align: left;
@@ -253,6 +307,14 @@ a:hover {
     margin: 30px auto;
 }
 
+.music-note {
+    font-style: normal;
+    font-size: 1.2em;
+    color: var(--color-highlight); /* UPGRADE: Nota musical em Alerta Vermelho */
+    margin-top: 40px;
+    border-top: 1px dashed var(--color-highlight);
+    padding-top: 15px;
+}
 
 /* VÍDEOS */
 .video-section {
@@ -261,7 +323,7 @@ a:hover {
 
 .video-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 40px;
     margin: 0 auto 40px auto;
     max-width: 1000px; 
@@ -270,19 +332,14 @@ a:hover {
 .video-item {
     background-color: var(--color-dark-gray);
     padding: 10px;
-    border: 1px solid var(--color-white);
-}
-
-.video-item iframe {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    display: block;
+    border: 3px solid var(--color-highlight); /* UPGRADE: Borda grossa em Vermelho */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
 }
 
 .video-item p {
     text-align: center;
     margin-top: 10px;
-    font-size: 0.9em;
+    font-size: 1em;
     font-style: italic;
     color: var(--color-light-gray);
 }
@@ -291,30 +348,40 @@ a:hover {
     display: block;
     text-align: center;
     margin-top: 20px;
+    /* UPGRADE: Faz o CTA do vídeo seguir o estilo Vermelho/Preto */
+    background-color: var(--color-highlight); 
+    color: var(--color-black);
+    border: 2px solid var(--color-highlight);
+}
+.video-cta:hover {
     background-color: var(--color-black);
     color: var(--color-white);
+    border-color: var(--color-white);
 }
 
 /* GOSTOS MUSICAIS */
 .music-list {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     margin: 0 auto 30px auto;
     max-width: 900px; 
 }
 
-
 .artist-item {
     flex: 1;
-    padding: 15px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 1px dashed var(--color-white);
+    padding: 20px;
+    background-color: var(--color-dark-gray);
+    border: 1px dashed var(--color-light-gray);
+    transition: all 0.3s;
+}
+.artist-item:hover {
+    border: 1px solid var(--color-highlight); /* Borda sólida no hover */
 }
 
 .artist-item h4 {
     text-transform: uppercase;
-    color: var(--color-white);
+    color: var(--color-highlight); /* UPGRADE: Artista em Vermelho */
     margin-bottom: 5px;
 }
 
@@ -324,13 +391,13 @@ a:hover {
     color: var(--color-dark-gray);
     text-align: center;
     padding: 30px 0;
-    border-top: 5px double var(--color-white);
+    border-top: 5px double var(--color-highlight); /* UPGRADE: Borda de Alerta Vermelho */
 }
 
 .footer p:first-child {
     font-size: 1.2em;
     margin-bottom: 15px;
-    color: var(--color-white);
+    color: var(--color-highlight); /* UPGRADE: Texto de contato em Vermelho */
 }
 
 .social-links a {
@@ -340,22 +407,7 @@ a:hover {
     color: var(--color-light-gray);
 }
 
-.social-links a:hover {
-    color: var(--color-white);
-}
-
-.footer p:last-child {
-    margin-top: 20px;
-    font-size: 0.8em;
-}
-
 /* RESPONSIVIDADE */
-@media (max-width: 1024px) {
-    .container {
-        width: 90%;
-    }
-}
-
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
@@ -377,8 +429,7 @@ a:hover {
         padding-top: 50px;
     }
     .hero-content h2 {
-        font-size: 2.5em;
-        padding: 5px 10px;
+        font-size: 3em;
     }
 
     .info-grid, 
