@@ -1,20 +1,19 @@
 /*
- * style.css - LÍRIC'S & CODE'S: Dark Street Flow V2.1
- * Melhorias: Alto Contraste Extremo, Alerta Vermelho, Efeitos JS e Parallax.
+ * style.css - LÍRIC'S & CODE'S: Dark Street Flow V5.0
+ * Status: COMPLETO. Todos os ajustes de fonte e alinhamento implementados.
  */
 
 /* GERAL */
 :root {
     --color-black: #000000;
     --color-white: #ffffff;
-    --color-light-gray: #f0f0f0; /* Ajustado para um branco mais 'puro' no P&B */
-    --color-dark-gray: #1a1a1a; /* Ajustado para um preto quase absoluto (mais contraste) */
-    --color-highlight: #ff0000; /* NOVO: VERMELHO SANGUE PURO */
+    --color-light-gray: #f0f0f0;
+    --color-dark-gray: #1a1a1a;
+    --color-highlight: #ff0000;
     --font-primary: 'Oswald', sans-serif;
     --font-display: 'Permanent Marker', cursive;
 }
 
-/* NOVO: Scroll Suave ativado */
 html {
     scroll-behavior: smooth; 
 }
@@ -40,7 +39,15 @@ a {
 }
 
 a:hover {
-    color: var(--color-highlight); /* UPGRADE: Hover agora é o Alerta Vermelho */
+    color: var(--color-highlight);
+}
+
+/* ♿ FOCO DE NAVEGAÇÃO */
+a:focus, 
+.cta-button:focus {
+    outline: 3px solid var(--color-highlight);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
 h1, h2, h3, h4 {
@@ -52,7 +59,7 @@ h1, h2, h3, h4 {
 
 /* GERAL E CONTAINERS */
 .container {
-    width: 85%; /* Levemente mais largo */
+    width: 85%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 60px 0;
@@ -63,7 +70,7 @@ h1, h2, h3, h4 {
 .header {
     background-color: var(--color-black); 
     color: var(--color-white);
-    padding: 15px 5%; /* Ajustado o padding lateral */
+    padding: 15px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -71,14 +78,13 @@ h1, h2, h3, h4 {
     width: 100%;
     top: 0;
     z-index: 100;
-    border-bottom: 2px solid var(--color-highlight); /* UPGRADE: Borda de Alerta Vermelho */
+    border-bottom: 2px solid var(--color-highlight);
     transition: all 0.3s ease-in-out;
 }
 
-/* === ESTILOS PARA O JS: HEADER DINÂMICO === */
 .header.scrolled {
     padding: 10px 5%;
-    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3); /* UPGRADE: Sombra sutil Vermelha */
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
 }
 
 .header h1 {
@@ -105,7 +111,7 @@ h1, h2, h3, h4 {
     position: absolute;
     width: 0;
     height: 2px;
-    background: var(--color-highlight); /* UPGRADE: Linha do hover em Vermelho */
+    background: var(--color-highlight);
     bottom: 0;
     left: 0;
     transition: width 0.3s ease-out;
@@ -125,10 +131,7 @@ h1, h2, h3, h4 {
     align-items: center;
     text-align: center;
     position: relative;
-    
-    /* === MUDANÇA PARA O PARALLAX SUTIL === */
-    background-attachment: fixed; 
-    /* ==================================== */
+    background-attachment: fixed; /* Parallax Sutil */
 }
 
 .hero-section::before {
@@ -138,40 +141,52 @@ h1, h2, h3, h4 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.85); /* Aumenta o overlay para 85% para focar no texto */
+    background: rgba(0, 0, 0, 0.85);
     z-index: 1;
 }
 
 .hero-content {
     color: var(--color-white);
     z-index: 2;
+    text-align: center;
+    
+    /* CORRIGIDO: POSICIONAMENTO VERTICAL ALTO */
+    margin-top: -80px; 
 }
 
+/* SUBTÍTULO RECÔNCAVO TO THE WORLD - AUMENTADO */
 .hero-content p {
-    font-size: 1.2em;
-    letter-spacing: 4px; /* Mais destaque */
+    /* CORRIGIDO: FONTE MAIOR */
+    font-size: 1.5em; 
+    letter-spacing: 4px;
     margin-bottom: 10px;
-    color: var(--color-highlight); /* UPGRADE: Tagline em Vermelho Sangue */
+    color: var(--color-highlight);
 }
 
+/* TÍTULO H2 (ESTE É O MEU MUNDO) */
 .hero-content h2 {
-    font-size: 4.5em; /* Aumentado o tamanho para mais impacto */
+    /* CORRIGIDO: FONTE COM MAIS IMPACTO */
+    font-size: 5.5em; 
     text-transform: uppercase;
     margin-bottom: 30px;
     color: var(--color-white);
     font-weight: 700;
+    
+    /* Centralização horizontal robusta */
+    width: fit-content; 
+    margin-left: auto;   
+    margin-right: auto;
 }
 
 /* === ESTILOS PARA O JS: TYPEWRITER EFFECT === */
-/* Garante que o H2 do Hero section não tenha a borda durante a digitação */
 #hero-title {
     border: none !important;
     padding: 0 !important;
 }
 
-/* Restaura o estilo de borda APÓS a digitação do JS (para manter o visual forte) */
+/* Restaura o estilo de borda APÓS a digitação do JS */
 #hero-title:not(:empty) { 
-    border: 5px solid var(--color-highlight); /* UPGRADE: Borda de Alerta Vermelho */
+    border: 5px solid var(--color-highlight);
     padding: 10px 20px;
     display: inline-block;
 }
@@ -179,8 +194,8 @@ h1, h2, h3, h4 {
 /* CURSOR ANIMADO */
 .cursor {
     display: inline-block;
-    width: 5px; /* Largura do cursor */
-    height: 1.1em; /* Altura do cursor */
+    width: 5px;
+    height: 1.1em;
     margin-left: 5px;
     background-color: var(--color-white); 
     animation: blink 0.7s infinite;
@@ -192,14 +207,14 @@ h1, h2, h3, h4 {
 }
 
 .cursor.typed-end {
-    background-color: var(--color-highlight); /* Cursor fica vermelho no final */
+    background-color: var(--color-highlight);
 }
 /* === FIM ESTILOS TYPEWRITER === */
 
 
-/* BOTÃO CTA (ALERTA VERMELHO) */
+/* BOTÃO CTA (VER PERFIL) */
 .cta-button {
-    background-color: var(--color-highlight); /* UPGRADE: Botão Vermelho Sólido */
+    background-color: var(--color-highlight);
     color: var(--color-black);
     padding: 15px 30px;
     text-transform: uppercase;
@@ -209,6 +224,8 @@ h1, h2, h3, h4 {
     cursor: pointer;
     letter-spacing: 2px;
     transition: all 0.3s;
+    
+    /* Margem superior removida na correção vertical */
 }
 
 .cta-button:hover {
@@ -224,7 +241,7 @@ h1, h2, h3, h4 {
     padding: 80px 0;
     border-top: 1px solid var(--color-dark-gray); 
     
-    /* === ESTILOS PARA O JS: REVEAL ON SCROLL === */
+    /* ESTILOS PARA O JS: REVEAL ON SCROLL */
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -236,7 +253,7 @@ h1, h2, h3, h4 {
 }
 
 .secondary-bg {
-    background-color: var(--color-dark-gray); /* UPGRADE: Fundo de seção de destaque em preto quase absoluto */
+    background-color: var(--color-dark-gray);
 }
 
 /* TÍTULOS DE SEÇÃO (h3) */
@@ -244,8 +261,8 @@ h1, h2, h3, h4 {
     text-transform: uppercase;
     font-size: 2em;
     margin: 0 auto 40px auto; 
-    color: var(--color-highlight); /* UPGRADE: Títulos de Seção em Alerta Vermelho */
-    border-bottom: 3px solid var(--color-highlight); /* UPGRADE: Linha de destaque em Vermelho */
+    color: var(--color-highlight);
+    border-bottom: 3px solid var(--color-highlight);
     display: inline-block;
     padding-bottom: 5px;
     letter-spacing: 2px;
@@ -263,14 +280,14 @@ h1, h2, h3, h4 {
 .info-card {
     flex: 1;
     padding: 20px;
-    border: 2px solid var(--color-highlight); /* UPGRADE: Borda de registro em Vermelho */
-    background-color: rgba(0, 0, 0, 0.5); /* UPGRADE: Fundo transparente escuro */
+    border: 2px solid var(--color-highlight);
+    background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
     transition: all 0.3s;
 }
 
 .info-card:hover {
-    background-color: var(--color-dark-gray); /* UPGRADE: Fundo sólido escuro no hover */
+    background-color: var(--color-dark-gray);
     transform: translateY(-5px);
 }
 
@@ -299,7 +316,7 @@ h1, h2, h3, h4 {
 .bio-text {
     font-style: italic;
     font-size: 1.1em;
-    border-left: 5px solid var(--color-highlight); /* UPGRADE: Borda de citação em Vermelho */
+    border-left: 5px solid var(--color-highlight);
     padding-left: 20px;
     margin-top: 30px;
     text-align: left;
@@ -310,7 +327,7 @@ h1, h2, h3, h4 {
 .music-note {
     font-style: normal;
     font-size: 1.2em;
-    color: var(--color-highlight); /* UPGRADE: Nota musical em Alerta Vermelho */
+    color: var(--color-highlight);
     margin-top: 40px;
     border-top: 1px dashed var(--color-highlight);
     padding-top: 15px;
@@ -332,7 +349,7 @@ h1, h2, h3, h4 {
 .video-item {
     background-color: var(--color-dark-gray);
     padding: 10px;
-    border: 3px solid var(--color-highlight); /* UPGRADE: Borda grossa em Vermelho */
+    border: 3px solid var(--color-highlight);
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
 }
 
@@ -348,7 +365,6 @@ h1, h2, h3, h4 {
     display: block;
     text-align: center;
     margin-top: 20px;
-    /* UPGRADE: Faz o CTA do vídeo seguir o estilo Vermelho/Preto */
     background-color: var(--color-highlight); 
     color: var(--color-black);
     border: 2px solid var(--color-highlight);
@@ -376,12 +392,12 @@ h1, h2, h3, h4 {
     transition: all 0.3s;
 }
 .artist-item:hover {
-    border: 1px solid var(--color-highlight); /* Borda sólida no hover */
+    border: 1px solid var(--color-highlight);
 }
 
 .artist-item h4 {
     text-transform: uppercase;
-    color: var(--color-highlight); /* UPGRADE: Artista em Vermelho */
+    color: var(--color-highlight);
     margin-bottom: 5px;
 }
 
@@ -391,13 +407,13 @@ h1, h2, h3, h4 {
     color: var(--color-dark-gray);
     text-align: center;
     padding: 30px 0;
-    border-top: 5px double var(--color-highlight); /* UPGRADE: Borda de Alerta Vermelho */
+    border-top: 5px double var(--color-highlight);
 }
 
 .footer p:first-child {
     font-size: 1.2em;
     margin-bottom: 15px;
-    color: var(--color-highlight); /* UPGRADE: Texto de contato em Vermelho */
+    color: var(--color-highlight);
 }
 
 .social-links a {
@@ -427,6 +443,10 @@ h1, h2, h3, h4 {
     .hero-section {
         height: 60vh;
         padding-top: 50px;
+    }
+    .hero-content {
+        /* Ajuste a margem negativa na mobile */
+        margin-top: -30px; 
     }
     .hero-content h2 {
         font-size: 3em;
